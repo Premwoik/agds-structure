@@ -88,4 +88,10 @@ abstract class AttributeNode<T>(val name: String) : Node() {
     fun hasValue(value: T): Boolean {
         return values.any { it.value == value }
     }
+
+    override fun toString(): String {
+        return "AttributeNode(name='$name', values=$values)"
+    }
+
+
 }

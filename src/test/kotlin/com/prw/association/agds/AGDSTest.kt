@@ -11,36 +11,47 @@ internal class AGDSTest {
     @Test
     fun addObjectIris() {
         val iris = Iris()
-        val data = iris.readData()
+        val data = iris.readDefaultData()
         val agds = iris.agds
-        data.forEach{agds.addObject(it)}
+        data.forEach { agds.addObject(it) }
         assertEquals("object number:", data.size, agds.objects.size)
         assertEquals("attributes number", 5, agds.attributes.size)
     }
 
 
     @Test
-    fun findSimilarToObject(){
+    fun findSimilarToObject() {
         val iris = Iris()
-        val data = iris.readData()
+        val data = iris.readDefaultData()
         val agds = iris.agds
-        data.take(3).forEach{agds.addObject(it)}
+        data.take(3).forEach { agds.addObject(it) }
         val obj = agds.objects[1]
         val result = agds.findSimilar(obj, -1)
-
         assertEquals(1.000f, roundToHundreds(result[0].similarity))
         assertEquals(0.748f, roundToHundreds(result[1].similarity))
         assertEquals(0.620f, roundToHundreds(result[2].similarity))
 
     }
+    @Test
+    fun findSimilarToObjectR1() {
+        val iris = Iris()
+        val data = iris.readDefaultData()
+        val agds = iris.agds
+        data.forEach { agds.addObject(it) }
+        val obj = agds.objects[1]
+        val result = agds.findSimilar(obj, -1)
+        assertEquals(1.000f, roundToHundreds(result[0].similarity))
+        assertEquals(0.988f, roundToHundreds(result[1].similarity))
+        assertEquals(0.986f, roundToHundreds(result[2].similarity))
+
+    }
 
     @Test
-    fun findSimilarToInputData(){
+    fun findSimilarToInputData() {
         val iris = Iris()
-        val data = iris.readData()
-        val agds = iris. agds
-//        data.take(5).forEach{agds.addObject(it)}
-        listOf(data[0], data[2]).forEach{agds.addObject(it)}
+        val data = iris.readDefaultData()
+        val agds = iris.agds
+        listOf(data[0], data[2]).forEach { agds.addObject(it) }
         val inputData = data[1]
         val result = agds.findSimilar(inputData)
         assertEquals(2, agds.objects.size)
@@ -50,17 +61,26 @@ internal class AGDSTest {
     }
 
     @Test
-    fun classify(){
+    fun findSimilarToInputDataR1() {
         val iris = Iris()
-        val data = iris.readData()
-        val agds = iris. agds
-        data.forEach{agds.addObject(it)}
-//        val clas = agds.classify(data[5].slice(0..3) as List<Float>)
-        val clas = agds.classify(listOf(5.8f,3.2f, 4.0f, 1.1f))
+        val data = iris.readDefaultData()
+        val agds = iris.agds
+        listOf(data[0], data[2]).forEach { agds.addObject(it) }
+        val inputData = data[1]
+        val result = agds.findSimilar(inputData)
+        assertEquals(2, result.size)
+        assertEquals(0.748f, roundToHundreds(result[0].similarity))
+        assertEquals(0.620f, roundToHundreds(result[1].similarity))
+    }
 
-//        assertEquals("Iris-setosa", clas)
+    @Test
+    fun classify() {
+        val iris = Iris()
+        val data = iris.readDefaultData()
+        val agds = iris.agds
+        data.forEach { agds.addObject(it) }
+        val clas = agds.classify(listOf(6.8f,2.8f,4.8f,1.4f))
         assertEquals("Iris-versicolor", clas)
-//
     }
 
     @Test
@@ -69,7 +89,7 @@ internal class AGDSTest {
     }
 
 
-    private fun roundToHundreds(v: Float): Float{
+    private fun roundToHundreds(v: Float): Float {
         return round(v * 1000) / 1000
     }
 }

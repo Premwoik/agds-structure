@@ -7,7 +7,7 @@ internal class IrisTest {
 
     @Test
     fun readData() {
-        val res = Iris().readData()
+        val res = Iris().readDefaultData()
         System.out.println(res)
         assert(res.size > 1)
     }

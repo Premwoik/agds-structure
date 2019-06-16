@@ -18,8 +18,14 @@ class Iris {
         ) as List<AttributeNode<Any>>
     )
 
-    fun readData(path: String = "/home/prw/IdeaProjects/agds-network/src/test/resources/iris.data"): List<List<Any>> {
-        return File(path).useLines { it.toList()}.map { it.split(",").map { parse(it) } }
+
+    fun readDefaultData(): List<List<Any>> {
+        val path = javaClass.classLoader.getResource("iris.data").file
+        return readData(path)
+    }
+
+    fun readData(path: String): List<List<Any>> {
+        return File(path).useLines { it.toList() }.map { it.split(",").map { parse(it) } }
     }
 
     private fun parse(line: String): Any {

@@ -38,6 +38,7 @@ class Classifier(val k: Int, private val attributes: List<FloatAttributeValue>) 
         while (nextIterationCondition(repr)) {
             attributeObjectsDistance(values, attributes[i])
         }
+        print(ranks)
 
         return ranks.map { it.second.values.last() as ClassAttributeValue }.groupBy { it.value }.maxBy { e -> e.value.size }!!.key
     }
