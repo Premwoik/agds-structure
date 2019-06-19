@@ -280,7 +280,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="1920" />
     <option name="y" value="27" />
     <option name="width" value="2560" />
@@ -463,7 +463,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.AGDSTest.removeObject">
+  <component name="RunManager" selected="Gradle.AGDSTest">
     <configuration default="true" type="ClojureREPL" factoryName="Local" activateToolWindowBeforeRun="false">
       <setting name="replType" value="NREPL" />
       <setting name="execution" value="LEININGEN" />
@@ -577,8 +577,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.AGDSTest.removeObject" />
         <item itemvalue="Gradle.AGDSTest" />
+        <item itemvalue="Gradle.AGDSTest.removeObject" />
         <item itemvalue="Gradle.AGDSTest.findSimilarToInputData" />
         <item itemvalue="Kotlin.com.prw.association.agds.AppKt" />
         <item itemvalue="Gradle.IrisTest" />
