@@ -4,7 +4,9 @@ import com.prw.association.agds.AGDS
 import com.prw.association.agds.AttributeNode
 import com.prw.association.agds.ClassAttributeNode
 import com.prw.association.agds.NumberAttributeNode
+import java.io.BufferedReader
 import java.io.File
+import java.io.InputStreamReader
 
 class Iris {
 
@@ -20,8 +22,8 @@ class Iris {
 
 
     fun readDefaultData(): List<List<Any>> {
-        val path = javaClass.classLoader.getResource("iris.data").file
-        return readData(path)
+        val path = javaClass.classLoader.getResourceAsStream("iris.data")
+        return BufferedReader(InputStreamReader(path)).useLines { it.toList() }.map { it.split(",").map { parse(it) } }
     }
 
     fun readData(path: String): List<List<Any>> {
