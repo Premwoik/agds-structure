@@ -19,11 +19,10 @@ class Classifier(val k: Int, private val attributes: List<FloatAttributeValue>) 
 
     fun addIfBetter(v: Pair<Float, ObjectNode>) {
         val index = ranks.indexOfFirst { v.first < it.first }
-        if (index >= 0 ) {
+        if (index >= 0) {
             ranks.add(index, v)
             if (ranks.size > k) ranks.removeAt(k)
-        }
-        else if(ranks.size < k){
+        } else if (ranks.size < k) {
             ranks.add(v)
         }
     }
@@ -47,8 +46,8 @@ class Classifier(val k: Int, private val attributes: List<FloatAttributeValue>) 
         index++
         return when {
             index == 0 -> reprIndex
-            index % 2 == 0 && greaterIndex < attributes.size-> greaterIndex++
-            smallerIndex >= 0-> smallerIndex--
+            index % 2 == 0 && greaterIndex < attributes.size -> greaterIndex++
+            smallerIndex >= 0 -> smallerIndex--
             else -> -1
         }
 

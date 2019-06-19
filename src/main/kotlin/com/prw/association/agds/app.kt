@@ -7,10 +7,10 @@ fun main(args: Array<String>) {
     val data = iris.readDefaultData()
     val agds = iris.agds
     data.forEach { agds.addObject(it) }
-    println("Give result object limit (ENTER to skip): ")
+    println("Give result objects limit (ENTER to skip): ")
     val limit = readLine()?.toIntOrNull() ?: -1
 
-    println("Give number of the object to find similar:")
+    println("Give number of the object <0-150)")
     readLine()?.toIntOrNull()?.let {
         if (it >= 0 && it < data.size) {
             val obj = data[it]

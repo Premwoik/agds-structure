@@ -50,7 +50,7 @@ class AGDS(attributes: List<AttributeNode<Any>>) {
 
     fun findSimilar(values: List<Any>): List<ObjectNode> {
         val obj = addObject(values)
-        val res = findSimilar(obj, - 1).subList(1, objects.size)
+        val res = findSimilar(obj, -1).subList(1, objects.size)
         removeObject(obj)
         return res
     }
