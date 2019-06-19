@@ -20,21 +20,14 @@ class AGDS(attributes: List<AttributeNode<Any>>) {
     }
 
     fun removeObject(values: List<Any>): Boolean {
-        getObjectIfExist(values)?.apply {
-            attributes
-                .zip(values)
-                .map { (attr, value) -> attr.removeValue(value, this) }
-            return objects.remove(this)
-        }
-        return false
+        return getObjectIfExist(values)?.let { removeObject(it) } ?: false
     }
 
     fun removeObject(obj: ObjectNode): Boolean {
-        return objects.remove(obj)
-    }
-
-    fun findSimilar(obj: ObjectNode): ObjectNode {
-        return findSimilar(obj, 1).first()
+        val fails = attributes.zip(obj.values)
+            .map { (attr, value) -> attr.removeValue(value, obj) }
+            .any { it == null }
+        return if (!fails) objects.remove(obj) else false
     }
 
     fun findSimilar(obj: ObjectNode, size: Int): List<ObjectNode> {

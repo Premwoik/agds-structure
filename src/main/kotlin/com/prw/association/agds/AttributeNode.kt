@@ -65,6 +65,7 @@ abstract class AttributeNode<T>(val name: String) : Node() {
             ?: run {
                 val newValue = wrapValue(value)
                 newValue.objects.add(obj)
+                newValue.count = 1
                 values.add(newValue)
                 if (newValue.isNumerical()) {
                     values.sortBy { it.value as Float }
@@ -74,7 +75,7 @@ abstract class AttributeNode<T>(val name: String) : Node() {
     }
 
     fun removeValue(value: T, obj: ObjectNode): AttributeValue<T>? {
-        return values.find { it.value == value }
+        return values.find { it == value }
             ?.apply {
                 if (this.count > 1) {
                     this.count--
